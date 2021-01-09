@@ -62,13 +62,55 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .hour-hand{
+      width: 50%;
     }
 
   </style>
 
   <script>
+    let seconds = document.querySelector(".second-hand");
+    let minutes = document.querySelector(".min-hand");
+    let hours = document.querySelector(".hour-hand");
+
+    let secDeg;
+    let minsDeg;
+    let hoursDeg;
+    
+    let startClock = () => {
+        secDeg += 6;
+        seconds.style.transform = `rotate(${secDeg}deg)`;
+        if(secDeg > (360 + 90)){
+            secDeg = 90;
+            minsDeg += 6;
+            minutes.style.transform = `rotate(${minsDeg + 90}deg)`;
+        }else if(minsDeg > (360 + 90)){
+            minsDeg = 90;
+            hoursDeg += 30;
+            hours.style.transform = `rotate(${hoursDeg + 90}deg)`;
+
+        } 
+    }
+    let setCurrentTime = () =>{
+        let date  = new Date(); 
+        secDeg = (date.getSeconds() * 6);
+        minsDeg = (date.getMinutes() * 6);
+        hoursDeg = ((date.getHours() > 12 ? date.getHours() - 12 : date.getHours()) *30);
 
 
+        seconds.style.transform = `rotate(${ secDeg + 90}deg)`;
+        minutes.style.transform = `rotate(${ minsDeg + 90 }deg)`;
+        hours.style.transform = `rotate(${ hoursDeg + 90 }deg)`;
+    } 
+
+    setCurrentTime();
+    var intervalID = window.setInterval(startClock, 1000);
+    // window.clearInterval(intervalID);
   </script>
 </body>
 </html>
