@@ -10,12 +10,61 @@
   <form class="search-form">
     <input type="text" class="search" placeholder="City or State">
     <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
+
     </ul>
   </form>
+
+  <div class="test">
+      
+  </div>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+class City{
+    constructor(city, state, population){
+        this.city = city;
+        this.state = state;
+        this.population = population;
+    }
+}
+const search = document.querySelector(".search");
+
+let cities;
+
+
+const getData = async () =>{
+    await fetch(endpoint)
+        .then(response => response.json())
+        .then(data => cities = data.map(city => new City(city.city, city.state, city.population)));
+    console.log(cities);
+
+}
+
+getData();
+function fillHtml(){
+    let ul = document.querySelector(".suggestions");
+    if(this.value === "") ul.innerHTML = "";
+    if(this.value !== ""){
+        //const reg = new RegExp(this.value, 'gi');
+        console.log(this.value);
+        cities.forEach(place => {
+            
+            console.log();
+            if(place.city.includes(this.value)){
+                var li = document.createElement("li");
+                li.appendChild(document.createTextNode(place.city));
+                ul.appendChild(li);
+            }
+            
+        });
+    }
+    
+}
+
+
+search.addEventListener("change", fillHtml);
+search.addEventListener("keyup", fillHtml);
+
+
 
 </script>
 </body>

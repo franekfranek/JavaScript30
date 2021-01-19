@@ -10,10 +10,10 @@
     // ## Array Cardio Day 2
 
     const people = [
-      { name: 'Wes', year: 1988 },
-      { name: 'Kait', year: 1986 },
+      //{ name: 'Wes', year: 1988 },
+      //{ name: 'Kait', year: 1986 },
       { name: 'Irv', year: 1970 },
-      { name: 'Lux', year: 2015 }
+      //{ name: 'Lux', year: 2015 }
     ];
 
     const comments = [
@@ -26,15 +26,37 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    let now = new Date();
+    let isOlderThan19 = people.some(function(person){
+        if((now.getFullYear() - person.year) >= 19){
+            return true;
+        }
+    });
+    let isOlderThan192 = people.some(x => (now.getFullYear() - x.year) > 19);
     // Array.prototype.every() // is everyone 19 or older?
+    let everyoneOlderThan19 = people.every(x => (now.getFullYear() - x.year) > 19);
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    let comment = comments.find(function(c){
+        if(c.id === 823423){
+            return true;
+        }
+    });
+    let comment1 = comments.find(com => com.id === 823423);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    let index = comments.findIndex(comm => comm.text === comment.text && comm.id === comment.id);
+
+    comments.splice(index,1);
+    console.table(comments);
+
+
+
+
 
   </script>
 </body>

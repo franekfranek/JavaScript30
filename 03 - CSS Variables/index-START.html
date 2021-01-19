@@ -21,10 +21,22 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root{
+      --base: gold;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl{
+      color: var(--base);
+    }
+
 
     body {
       text-align: center;
@@ -45,6 +57,17 @@
   </style>
 
   <script>
+    
+    let inputs = document.querySelectorAll("input");
+
+    inputs.forEach((x) => {
+        // if defined function(not arrow f.) before is used this can be used instead of e.target  
+        // another addeventlistner can be add "mousemove"
+        x.addEventListener("change", (e) => {
+            let suffix = e.target.dataset.sizing || "";
+            document.querySelector(':root').style.setProperty(`--${e.target.id}`, e.target.value + suffix);
+        });
+    })
   </script>
 
 </body>

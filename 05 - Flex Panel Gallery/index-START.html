@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Flex Panels 💪</title>
+  <title>Flex Panels 💪 </title>
   <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -26,6 +26,8 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
+      
     }
 
     .panel {
@@ -43,6 +45,12 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      /*even distribution of kids flex Kids*/
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -56,7 +64,21 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      border: 1px solid red;
+      flex-grow: 1;
+      flex-shrink: 0;
+      flex-basis: auto;
+      /*flex: 1 0 auto; shortcut for these 3 above*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
     }
+
+    .panel > *:first-child{ transform: translateY(-100%);}
+    .panel.open-active > *:first-child{ transform: translateY(0);}
+    .panel > *:last-child{ transform: translateY(100%);}
+    .panel.open-active > *:last-child{ transform: translateY(0);}
 
     .panel p {
       text-transform: uppercase;
@@ -71,6 +93,7 @@
 
     .panel.open {
       font-size: 40px;
+      flex: 5;
     }
 
   </style>
@@ -78,7 +101,7 @@
 
   <div class="panels">
     <div class="panel panel1">
-      <p>Hey</p>
+      <p>Hey </p>
       <p>Let's</p>
       <p>Dance</p>
     </div>
@@ -105,7 +128,28 @@
   </div>
 
   <script>
+    let panels = document.querySelectorAll(".panel");
+    console.log(panels);
 
+    function toggleOpen(){
+        this.classList.toggle("open");
+    }
+
+    function toggleOpenActive(e){
+        console.log(e.propertyName);
+        // we can use like this because multiple properties are transitioned
+        //this.classList.toggle("open-active");
+        if(e.propertyName.includes('flex')){
+            this.classList.toggle("open-active");
+        }
+    }
+
+
+
+    panels.forEach(pan => pan.addEventListener("click", toggleOpen)); 
+    //when transition of class open is finished we want to trigger this
+    // flex-grow and font-size transition
+    panels.forEach(pan => pan.addEventListener("transitionend", toggleOpenActive)); 
   </script>
 
 

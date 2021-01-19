@@ -35,31 +35,89 @@
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
     
-    // Array.prototype.filter()
+    // Array.prototype.filter()  return same/diffrent lenght array depends
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const inventors1500 = inventors.filter(inventor => inventor.year > 1500 && inventor.year < 1601);
+    const withFunction = inventors.filter(function(inventor){
+        if(inventor.year > 1500 && inventor.year < 1601){
+          return true; //keep it if true
+        } 
+    });
 
-    // Array.prototype.map()
-    // 2. Give us an array of the inventors first and last names
+    // Array.prototype.map() return same lenght array 
+	  // 2. Give us an array of the inventors first and last names
+  	const fullNameInventors = inventors.map((x) =>{
+		  return { first : x.first, last : x.last }
+  	});
+	  const fullNameInventors2 = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    // sort by birth day from oldest date not by lived years
+    const sortedInventors1 = inventors.sort(function(person1, person2){
+      if(person1.year > person2.year) return 1;
+      else return -1;
+    });
+    const sortedInventors2 = inventors.sort((a, b) => b.year < a.year ? 1 : -1);
+    const sortedInventors3 = inventors.sort((a, b) => b.year < a.year);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const allYears = inventors.reduce((acc, inventor) => acc + inventor.passed - inventor.year, 0);
 
-    // 5. Sort the inventors by years lived
+      // 5. Sort the inventors by years lived
+    const byYearsLived = inventors.sort((a, b) => (a.passed - b.year));
+
+    //SLICE IS USED HERE BECAUSE SORT CHANGES ORGINAL ARRAY!!!!
+    const byYearsLived2 = inventors.slice().sort(function(a, b){
+      let guy1 = a.passed - a.year;
+      let guy2 = b.passed - b.year;
+      if(guy1 > guy2){
+        return -1;
+      }
+      else{
+        return 1;
+      }
+    })
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    /*const category = document.querySelector(".mw-category");
+    // node list to array
+    const links = [...category.querySelectorAll("a")];
+    //list of Boulevards strings
+    const de = links
+                .map(link => link.textContent)
+                .filter(bulevar => bulevar.includes("de") && !bulevar.includes("des"));
+                */
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    let sortedPpl = people.sort(function(a, b){
+        let person1 = a.split(",")[0];
+        let person2 = b.split(",")[0];
+        // destructure ing the arr, it puts varriables but when prineted it just string with fname and lname
+        /*const [aLast, aFirst] = a.split(", ");
+        const [bLast, bFirst] = b.split(", ");
+        return aLast > bLast ? 1 : -1;*/
+        if(person1 > person2) return 1;
+        else return -1;
+    })
+    
     // 8. Reduce Exercise
     // Sum up the instances of each of these
+    // REMEMBER to return acc if {} with function are used
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let dataProcessed = data.reduce((acc, car) => {
+        if(!acc[car]){
+            acc[car] = 1;
+        }else{
+            acc[car]++;
+        }
+        return acc;
+    }, {});
 
+    console.log(dataProcessed);
   </script>
 </body>
 </html>
