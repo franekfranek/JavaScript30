@@ -96,6 +96,29 @@
   </div>
 
 <script>
+    let items = document.querySelectorAll(".item");
+    console.log(items);
+    items.forEach((box, i) => box.addEventListener("click", (e) =>{
+        console.log(e.shiftKey);
+        let checked = checkIfIsAnyPressed(i);
+        console.log(checked);
+        for(let j = checked[0]; j < checked[checked.length -1]; j++ ){
+            if(items[j].children[0].checked !== true && e.shiftKey){
+                items[j].children[0].checked = true;
+            }
+        }
+    }))
+
+
+    
+
+    function checkIfIsAnyPressed(targetIndex){
+        let checkedBoxex = [];
+        for(let i = 0; i < items.length; i++){
+            if(items[i].children[0].checked) checkedBoxex.push(i);
+        }
+        return checkedBoxex;
+    }
 </script>
 </body>
 </html>

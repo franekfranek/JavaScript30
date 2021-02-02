@@ -110,6 +110,9 @@ function handleCheck(e) {
     // loop over every single checkbox
     checkboxes.forEach(checkbox => {
       console.log(checkbox);
+      //this here is the being checked element
+      //first is when we checking one but there is already one checked after it
+      //second is opposite: when we checking one but there is already one checked before it
       if (checkbox === this || checkbox === lastChecked) {
         inBetween = !inBetween;
         console.log('Starting to check them in between!');

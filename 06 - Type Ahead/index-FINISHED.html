@@ -25,18 +25,23 @@ fetch(endpoint)
 function findMatches(wordToMatch, cities) {
   return cities.filter(place => {
     // here we need to figure out if the city or state matches what was searched
+    // g for global and i for insensitive
     const regex = new RegExp(wordToMatch, 'gi');
     return place.city.match(regex) || place.state.match(regex)
   });
 }
 
+//it just raplaces number with number with commas
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 function displayMatches() {
+    // this value is user's input
   const matchArray = findMatches(this.value, cities);
   const html = matchArray.map(place => {
+      //next 3 variables are used to highlight the words and get populations
+      // regex finds what person types in and place.replace replaces this with span
     const regex = new RegExp(this.value, 'gi');
     const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
     const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
@@ -53,6 +58,7 @@ function displayMatches() {
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
+// change only works if we click outside
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
 

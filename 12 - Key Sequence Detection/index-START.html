@@ -7,6 +7,18 @@
 </head>
 <body>
 <script>
+    let seq = '';
+    let secret = "ok";
+
+    document.addEventListener('keydown', (e) => {
+        seq += e.key;
+        if(seq.length > secret.length){
+            seq = seq.substring(1);
+        }
+        if(seq.includes(secret)) console.table(seq);
+
+    })
+
 </script>
 </body>
 </html>
