@@ -43,6 +43,7 @@
   </div>
 
   <script>
+      //it reduce number of times scroll is called by eventlistener
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -57,6 +58,42 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+    //The read-only innerHeight property of the Window interface returns the interior
+    //height of the window in pixels, including the height of the horizontal scroll bar,
+    //if present.
+
+    const imgs = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e){
+        //we want to slide it in when it 50% in the viewport
+        imgs.forEach(img => {
+            //give us how far we are scrolled from top
+            //const slideInAt = window.scrollY - window.innerHeight;
+            console.log(img.height);
+            //this gives half way of the img height when we scroll
+            const slideInAt = (window.scrollY + window.innerHeight) - img.height / 2 ;
+
+            //img.offsetTop gives how far in pixels img is from the top of the window
+            //gives bottom of the img
+            const imageBottom = img.offsetTop + img.height;
+            const isHalfShown = slideInAt > img.offsetTop;
+            //we scroled passed the img it is not visible anymore
+            const isNotScrolledPast= window.scrollY < imageBottom;
+            
+
+            // so if img is more than half shown and we did't scroll passed it 
+            if(isHalfShown && isNotScrolledPast){
+                img.classList.add('active');
+            }
+            //we either passed the img or didn't get it there yet
+            else{
+                img.classList.remove('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide));
 
   </script>
 

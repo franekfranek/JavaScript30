@@ -182,6 +182,20 @@
     </li>
   </ul>
 <script>
+    let liElements = document.querySelectorAll('li');
+    let liElements2 = document.querySelectorAll('[data-time]');
+    console.log(Array.from(liElements2));
+    let records = [];
+    liElements.forEach(x => records.push(x.dataset.time));  
+    //console.log(records);
+
+
+    let seconds = records.reduce((a, i) => {
+        a += (parseInt(i.substring(0, i.indexOf(':'))) * 60 ) +  parseInt(i.substring((i.indexOf(':')) + 1));
+        return a;
+    }, 0);
+
+    console.log((seconds / 60) /60);
 </script>
 </body>
 </html>
