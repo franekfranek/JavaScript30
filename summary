@@ -1,0 +1,31 @@
+Worth mentioning topics.
+1 - play sounds on click 
+2 - clock - setinterval and some math(degrees)
+3 - Update CSS Variables with JS and inputs(ranges)
+4  - array methods
+5 - very nice flex panel, with scale and trasition worth using somewhere
+6 - implementation of search, adding html elements together while insertin the inputs
+7 - array methods 2
+8 - canvas, painting and brush size loops from small to huge
+9 - console interesting methods - e.g. dir, count, table , group, info
+10 - if you hold shift all checkbox will be checked between already checked ones, good one
+11 - custom video player with customizable speed, sound volume, play button, and skip seconds
+12 - it adds unicorns to the site if we typed key word, good one, easter egg
+13 - pictures slide in while we scrolling, no library just css animations - many measurements of top and so on worth examing again
+14 - reference vs copying 
+15 - local storage usage, intersting each site has its own localstorage, good one
+16 - funny effect of hoovering over a thing, easter egg
+17 - how to sort titles with NO ARTICLES, interesting
+18 - adding values in format min:seconds with reduce
+19 - manipulating the camera stream, interesting
+20 - voice recognition good one, eater egg possible
+21 - gelocation available for apple
+22 - it adds background color to chosen words in html, follow effect, intersting
+23 - voice sythezator is available out the box in js, here from text to voice, can control speed and and pitch of the voice(max sounds like old lady), funny
+24 - sticky nav very USEFUL, used in my portfolio 2020, very good - many measurements of top and so on worth examing again
+25 - event bubbling, capturing etc. Made a detailed note of it in js notes.
+26 - menu with follow effect on hoover, adjusting menu background to the content, USEFUL - many measurements of top and so on worth examing again
+27 - click and drag implementation, interesting rather USEFUL but many libs available - many measurements of top and so on worth examing again
+28 - video speed control implementated as a side big bar on hoover, interesting
+29 - coundown implementation - ready buttons with minutes and you can put minutes in the input USEFUL
+30 - whack a mole game - good use of random method  

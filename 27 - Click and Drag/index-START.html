@@ -35,6 +35,48 @@
   </div>
 
 <script>
+  const slider = document.querySelector('.items');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+
+  slider.addEventListener('mousedown', (e) =>{
+    isDown = true;
+    slider.classList.add('active');
+    //pageX is exact x position on the page
+    // we need to substruct slider.offsetLeft in case of margin/padding 
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () =>{
+    isDown = false;
+    slider.classList.remove('active');
+
+  });
+
+  slider.addEventListener('mouseup', () =>{
+    isDown = false;
+    slider.classList.remove('active');
+
+  });
+
+  slider.addEventListener('mousemove', (e) =>{
+    if(!isDown) return;//stop the fn from running
+
+    //iven though we move the mouse the x is the same
+    console.log(startX);
+
+    e.preventDefault();
+    //this is changing when we move
+    const x = e.pageX - slider.offsetLeft;
+    //how far we are from initial state 
+    const walk = (x - startX) * 3;
+    slider.scrollLeft = scrollLeft - walk;
+
+  });
+
 </script>
 
   </body>
